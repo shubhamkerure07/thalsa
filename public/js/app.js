@@ -86,9 +86,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initRouting() {
-  const handleHash = () => {
-    const hash = window.location.hash.replace('#', '') || 'home';
-    switchView(hash);
+  const handleHash = async () => {
+    const rawHash = window.location.hash.replace('#', '') || 'home';
+    const [viewName, queryString] = rawHash.split('?');
+    const params = new URLSearchParams(queryString || '');
+    const id = params.get('id');
+
+    switchView(viewName);
+
+    if (viewName === 'answer') {
+      if (id) {
+        await loadSavedConversation(id);
+      } else if (!state.currentQuestion) {
+        try {
+          const res = await fetch('/api/history');
+          const data = await res.json();
+          if (data.history && data.history.length > 0) {
+            await loadSavedConversation(data.history[0].id);
+          }
+        } catch (e) {}
+      }
+    }
   };
 
   window.addEventListener('hashchange', handleHash);

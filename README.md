@@ -1,135 +1,136 @@
-# THALSA — Ocean of Knowledge AI Engine
+# 🌊 THALSA — Student Knowledge Platform & Ocean Engine
 
-> **Multiple minds. One clear ocean of insight.**
-> *Ask once. Get a smarter, grounded answer.*
+<p align="center">
+  <a href="https://thalsa.vercel.app/">
+    <img src="https://img.shields.io/badge/LIVE%20DEMO-thalsa.vercel.app-D5FF72?style=for-the-badge&logo=vercel&logoColor=151515" alt="Live Demo" />
+  </a>
+  <a href="https://github.com/shubhamkerure07/thalsa">
+    <img src="https://img.shields.io/badge/GITHUB-shubhamkerure07%2Fthalsa-151515?style=for-the-badge&logo=github&logoColor=D5FF72" alt="GitHub Repo" />
+  </a>
+  <img src="https://img.shields.io/badge/VERSION-v2.0.0-9B8BFF?style=for-the-badge" alt="Version 2.0.0" />
+  <img src="https://img.shields.io/badge/LICENSE-MIT-151515?style=for-the-badge" alt="License MIT" />
+</p>
 
-THALSA (derived from *Thalassa* — the ancient ocean) is a high-performance, minimalist multi-model AI comparison and knowledge aggregation engine. It queries multiple state-of-the-art AI models simultaneously, compares their structured perspectives side-by-side, analyzes semantic consensus, and synthesizes a consolidated final take ("**THALSA'S TAKE**").
-
----
-
-## 🎨 Visual Identity & Design System
-
-The product aesthetic is inspired by high-end design languages such as Linear, Raycast, and modern Apple interfaces:
-
-* **Primary Palette**: Sky Blue (`#7AA8C8`), Warm Gold (`#C8A45D`), Muted Bronze (`#A87B51`), Deep Charcoal/Black (`#0C0D0E`), Cream/Off-White (`#F3EFEA`).
-* **Clean Typography**: Powered by `Geist` and `JetBrains Mono` for code blocks.
-* **Subtle Motion**: Progressive step indicators, refined card hovering, smooth responsive layout.
-* **Non-bloated**: Free of unnecessary neon glow, heavy glassmorphism, or intrusive AI particles.
+> **From Information to Understanding.**  
+> *THALSA (derived from ancient Greek Thalassa — the sea) is a high-clarity, student-friendly knowledge and answer platform. Ask once and get structured, pedagogical explanations with verified sources, exam-ready formats, and real-time public telemetry.*
 
 ---
 
-## 🚀 Version Releases & Roadmap
+## 🌐 Live Application
 
-### 📦 v1.0.0 (Current Release)
-1. **One-Prompt Multi-Model Comparison**:
-   - Query **Google (Gemini 1.5 Flash)**, **Groq (Llama 3.3 70B)**, **Cerebras (Llama 3.1 8B)**, **OpenAI (GPT-4o mini)**, and **Anthropic (Claude 3.5 Haiku)** concurrently.
-2. **Student & Exam Assistant Engine**:
-   - Tailored academic response modes: standard concept breakdown, 2-mark, 5-mark, and 8-mark structured exam preparation.
-3. **Knowledge Retrieval Layer**:
-   - Built-in multi-source knowledge integration via Wikipedia, Wikidata, StackExchange, and OpenAlex.
-4. **THALSA'S TAKE**:
-   - Automated intelligent synthesis highlighting consensus points, key differences, and the cleanest answer.
-5. **Response Agreement Score**:
-   - Transparent semantic overlap scoring across model outputs without falsely claiming factual ground truth.
-6. **Built-in Local Database (SQLite)**:
-   - Full history persistence with one-click reloading of past comparisons.
+Explore the live production deployment at:
+### 👉 **[https://thalsa.vercel.app/](https://thalsa.vercel.app/)**
 
-### 🌊 v2.0.0 (Ocean Layer & Public APIs Grounding)
-1. **Public APIs Directory Hub**:
-   - Curated directory of top, verified public APIs ingested from `public-apis/public-apis` across 10 categories (Weather, Finance, Games, Anime, Books, Development, News, Science, etc.).
-   - Frontend Public APIs explorer with search, category filtering, HTTPS/CORS indicators, and direct docs links.
-2. **Real-Time Live Ground Truth Dispatcher**:
-   - **Meteorology & Forecast:** Real-time weather, temperature, humidity, and wind conditions via Open-Meteo Public API with preset global city coordinates.
-   - **Financial & Crypto Markets:** Live spot cryptocurrency prices (Bitcoin, Ethereum, Solana, Doge) and global foreign exchange rates (USD, INR, EUR, GBP, JPY) via Coinbase & CoinGecko Public APIs.
-   - **Tech & Engineering News:** Real-time trending headlines from HackerNews Firebase Public API.
-   - **API Recommender Engine:** Intelligent discovery for developer questions (e.g., *"What public APIs exist for weather?"*).
-3. **Transparent Public API Verification**:
-   - All live facts cited with verified source URLs and integrated into Thalsa's answer synthesis.
+---
+
+## 📸 Product Showroom & Screenshots
+
+### 1. Landing Page & "The Information Crystallizer"
+*Editorial Warm Ivory canvas featuring our central omnibox, exam marks selector, dynamic SVG knowledge crystallizer, and 3-step architectural breakdown.*
+
+![THALSA Landing Page](docs/screenshots/thalsa-landing.png)
+
+---
+
+### 2. Answer Workspace & Live Telemetry
+*Structured answers calibrated with clear definitions, LaTeX formulas, code diagnostics, key takeaways card, and expandable verified sources drawer.*
+
+![THALSA Answer Workspace](docs/screenshots/thalsa-workspace.png)
+
+---
+
+### 3. Public APIs Hub (v2 Ocean Layer)
+*Curated directory of over 100+ open developer and educational APIs with instant search, category filtering, and direct documentation links.*
+
+![THALSA Public APIs Hub](docs/screenshots/thalsa-apis.png)
+
+---
+
+## 🎨 Distinctive Visual Identity
+
+THALSA intentionally departs from generic blue-purple AI gradients and heavy glassmorphism:
+
+| Design Token | Value | Purpose |
+| :--- | :--- | :--- |
+| **Primary Background** | `#F5F1E8` (Warm Ivory) | Warm, book-like editorial surface with subtle paper stippling |
+| **Primary Text & Ink Borders** | `#151515` (Ink Black) | Sharp 1.5px–2px tactile borders with crisp contrast |
+| **Signature Accent** | `#D5FF72` (Electric Lime) | High-visibility primary action buttons and active status badges |
+| **Secondary Accent** | `#9B8BFF` (Muted Violet) | Elegant secondary accents, key takeaways, and category markers |
+| **Surfaces & Cards** | `#FCFAF6` & `#EBE5D8` | Warm neutral card backgrounds with solid `3px 3px 0px #151515` shadows |
+| **Typography** | `Fraunces` + `Plus Jakarta Sans` | Expressive British/Swiss editorial serif headers paired with modern UI text |
+
+---
+
+## 🚀 Core Features & Capabilities
+
+### 🎓 1. Student-Centric & Exam-Engineered Answers
+- **Calibrated Marking Schemes**: Select **2 marks**, **5 marks**, **8 marks**, or **10 marks** to shape the depth of the explanation.
+- **Pedagogical Structure**: Direct definitions, physical/computational principles, formulas, step-by-step derivations, and summary takeaways.
+- **Interactive Follow-ups**: One-tap smart action pills (*Explain simpler*, *Give example*, *Break down step-by-step*, *Quiz me*).
+
+### 🔍 2. Zero-Cost Verified Knowledge Engine
+- Operates out-of-the-box at **zero cost** without mandatory paid API subscriptions.
+- Queries authoritative, transparent public databases:
+  - **Wikipedia & Wikidata**: Conceptual definitions, scientific laws, history, and mathematical formulas.
+  - **Stack Exchange (Stack Overflow)**: Programming syntax, compiler debugging, and technical discussions.
+  - **OpenAlex**: Scholarly publications, research insights, and academic literature.
+
+### ⚡ 3. Real-Time Live Ground Truth Dispatcher (v2.0)
+- **Meteorological Telemetry**: Instant weather conditions, humidity, temperature, and wind speed via **Open-Meteo Public API**.
+- **Financial & Crypto Markets**: Real-time cryptocurrency spot prices (BTC, ETH, SOL) and global currency exchange rates via **Coinbase & CoinGecko Public APIs**.
+- **Tech Headlines**: Live trending discussions streaming directly from the **HackerNews Firebase API**.
+
+### 🌊 4. Curated Public APIs Directory Hub
+- Browse and search through verified open public APIs across 10 categories (Weather, Finance, Science, Development, Games, Books, etc.).
+- Inspect authentication requirements (Zero-Auth / Free / Key), HTTPS support, and CORS compliance.
 
 ---
 
 ## 🛠 Tech Stack
 
-* **Frontend**: HTML5, CSS3 (Custom Design Tokens), JavaScript (ES6+), Marked.js.
+* **Frontend**: Vanilla ES6+, CSS3 (Custom Editorial Design System), Marked.js, KaTeX (LaTeX math rendering).
 * **Backend**: Node.js, Express.js.
-* **Database**: SQLite (via `better-sqlite3` with WAL mode).
-* **Architecture**: Pluggable provider architecture with multi-source knowledge coordinators.
+* **Serverless / Cloud**: Vercel Serverless Functions (`api/index.js`, `api/[...slug].js`).
+* **Storage**: SQLite (`better-sqlite3` with WAL mode) for local persistence + zero-latency in-memory fallback for serverless edge runtimes.
+* **APIs**: Open-Meteo, Coinbase, CoinGecko, HackerNews, Wikipedia REST, Wikidata SPARQL, StackExchange, OpenAlex.
 
 ---
 
-## 📦 Getting Started
+## 💻 Getting Started Locally
 
-### 1. Prerequisites
-* [Node.js](https://nodejs.org/) (v18+)
-* npm
-
-### 2. Installation
+### 1. Clone the repository
 ```bash
-# Clone or navigate to the repository
+git clone https://github.com/shubhamkerure07/thalsa.git
 cd thalsa
+```
 
-# Install dependencies
+### 2. Install dependencies
+```bash
 npm install
 ```
 
-### 3. Configure Environment (Optional)
-Copy `.env.example` to `.env`:
+### 3. Start the local server
 ```bash
-cp .env.example .env
-```
-Add your optional API keys in `.env` (Gemini, Groq, Cerebras, OpenAI, Anthropic).  
-*(Note: If no API keys are provided, THALSA runs out-of-the-box in mock/demo mode).*
-
-### 4. Run THALSA
-```bash
-# Start server
 npm start
-
-# Or with automatic reload during development
-npm run dev
 ```
 
-Open your browser and visit:
+Open your browser at:
 ```
 http://localhost:3005
 ```
 
 ---
 
-## 📂 Project Structure
+## ☁️ Deployment
 
-```
-thalsa/
-├── public/
-│   ├── css/
-│   │   └── style.css          # Design system & mobile layout
-│   ├── js/
-│   │   └── app.js             # SPA router, comparison lifecycle, history
-│   └── index.html             # Clean semantic HTML interface
-├── server/
-│   ├── db/
-│   │   └── database.js        # SQLite persistence layer
-│   ├── engine/
-│   │   ├── LumiqOrchestrator.js # Query orchestration engine
-│   │   └── StudentSynthesizer.js # Pedagogical answer synthesis
-│   ├── knowledge/
-│   │   ├── KnowledgeCoordinator.js # Multi-API knowledge dispatcher
-│   │   ├── WikipediaProvider.js
-│   │   ├── WikidataProvider.js
-│   │   ├── StackExchangeProvider.js
-│   │   └── OpenAlexProvider.js
-│   ├── providers/
-│   │   ├── BaseProvider.js    # Pluggable AI provider interface
-│   │   ├── GoogleProvider.js
-│   │   ├── GroqProvider.js
-│   │   ├── CerebrasProvider.js
-│   │   ├── OpenAIProvider.js
-│   │   ├── AnthropicProvider.js
-│   │   └── ProviderManager.js
-│   └── index.js               # Express REST API routes & rate limiter
-├── data/                      # (Ignored in Git) SQLite DB
-├── .env.example
-├── .gitignore
-├── package.json
-└── README.md
-```
+### Deploy to Vercel (Recommended)
+1. Fork or clone this repository to your GitHub account.
+2. Go to [Vercel](https://vercel.com/) and click **Add New Project**.
+3. Import `thalsa`.
+4. Deploy! Vercel will automatically build the static assets and serverless functions according to `vercel.json`.
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. Open source and built for students, researchers, and developers worldwide.
