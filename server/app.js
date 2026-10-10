@@ -38,8 +38,11 @@ app.use('/api/', (req, res, next) => {
   next();
 });
 
-// GET /api/models - List configured providers
-app.get('/api/models', (req, res) => {
+// API Router — mounted on both '/api' and '/' for seamless local & serverless compatibility
+const apiRouter = express.Router();
+
+// GET /models - List configured providers
+apiRouter.get('/models', (req, res) => {
   try {
     const models = providerManager.getAllProviders();
     const configuredCount = models.filter(m => m.isConfigured).length;
@@ -53,8 +56,8 @@ app.get('/api/models', (req, res) => {
   }
 });
 
-// GET /api/public-apis - List and search curated public APIs (v2 feature)
-app.get('/api/public-apis', (req, res) => {
+// GET /public-apis - List and search curated public APIs (v2 feature)
+apiRouter.get('/public-apis', (req, res) => {
   try {
     const { q = '', category = '' } = req.query;
     const apis = searchApis(q, category);
@@ -67,8 +70,8 @@ app.get('/api/public-apis', (req, res) => {
   }
 });
 
-// GET /api/public-apis/categories - List available public API categories
-app.get('/api/public-apis/categories', (req, res) => {
+// GET /public-apis/categories - List available public API categories
+apiRouter.get('/public-apis/categories', (req, res) => {
   try {
     const categories = getCategories();
     res.json({ categories });
@@ -77,8 +80,8 @@ app.get('/api/public-apis/categories', (req, res) => {
   }
 });
 
-// POST /api/ask - Primary THALSA Student & Knowledge Assistant Endpoint
-app.post('/api/ask', async (req, res) => {
+// POST /ask - Primary THALSA Student & Knowledge Assistant Endpoint
+apiRouter.post('/ask', async (req, res) => {
   try {
     const { question, mode = 'standard', examMarks = null, isStudyMode = false, previousContext = '' } = req.body;
 
@@ -122,8 +125,8 @@ app.post('/api/ask', async (req, res) => {
   }
 });
 
-// POST /api/compare - Compatibility endpoint for multi-model comparisons
-app.post('/api/compare', async (req, res) => {
+// POST /compare - Compatibility endpoint for multi-model comparisons
+apiRouter.post('/compare', async (req, res) => {
   try {
     const { question, mode = 'compare', selectedModels = [] } = req.body;
 
@@ -188,8 +191,8 @@ app.post('/api/compare', async (req, res) => {
   }
 });
 
-// GET /api/history - Get past questions list
-app.get('/api/history', (req, res) => {
+// GET /history - Get past questions list
+apiRouter.get('/history', (req, res) => {
   try {
     const list = db.getRecentConversations(40);
     res.json({ history: list });
@@ -198,8 +201,8 @@ app.get('/api/history', (req, res) => {
   }
 });
 
-// GET /api/history/:id - Fetch past question with details
-app.get('/api/history/:id', (req, res) => {
+// GET /history/:id - Fetch past question with details
+apiRouter.get('/history/:id', (req, res) => {
   try {
     const item = db.getConversationWithResponses(req.params.id);
     if (!item) {
@@ -229,8 +232,8 @@ app.get('/api/history/:id', (req, res) => {
   }
 });
 
-// DELETE /api/history/:id - Delete single item
-app.delete('/api/history/:id', (req, res) => {
+// DELETE /history/:id - Delete single item
+apiRouter.delete('/history/:id', (req, res) => {
   try {
     db.deleteConversation(req.params.id);
     res.json({ success: true });
@@ -239,8 +242,8 @@ app.delete('/api/history/:id', (req, res) => {
   }
 });
 
-// DELETE /api/history - Clear all history
-app.delete('/api/history', (req, res) => {
+// DELETE /history - Clear all history
+apiRouter.delete('/history', (req, res) => {
   try {
     db.clearAllHistory();
     res.json({ success: true });
@@ -249,8 +252,8 @@ app.delete('/api/history', (req, res) => {
   }
 });
 
-// POST /api/settings/keys - Dynamic runtime API keys
-app.post('/api/settings/keys', (req, res) => {
+// POST /settings/keys - Dynamic runtime API keys
+apiRouter.post('/settings/keys', (req, res) => {
   try {
     const { geminiKey, groqKey, cerebrasKey, openaiKey, anthropicKey } = req.body;
     providerManager.updateKeys({ geminiKey, groqKey, cerebrasKey, openaiKey, anthropicKey });
@@ -262,6 +265,10 @@ app.post('/api/settings/keys', (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// Mount router on both '/api' and '/'
+app.use('/api', apiRouter);
+app.use('/', apiRouter);
 
 // Client fallback route for SPA
 app.use((req, res) => {
