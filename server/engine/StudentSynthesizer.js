@@ -14,17 +14,114 @@ function formatStudentResponse(question, knowledgeData, options = {}) {
   const wikiData = sources.find(s => s.source === 'Wikidata');
   const stackSource = sources.find(s => s.source === 'Stack Exchange');
   const openAlexSource = sources.find(s => s.source === 'OpenAlex');
+  const weatherSource = sources.find(s => s.source === 'Open-Meteo Public API');
+  const financeSource = sources.find(s => s.source && (s.source.includes('CoinGecko') || s.source.includes('Exchange Rates')));
+  const techNewsSource = sources.find(s => s.source === 'HackerNews Public API');
+  const publicApiSource = sources.find(s => s.source === 'public-apis Directory');
 
   let answerText = '';
   let keyPoints = [];
   let followUpSuggestions = [];
 
   // ==========================================
+  // CASE 0: LIVE GROUNDING FROM PUBLIC APIS (v2 Feature)
+  // ==========================================
+  if (weatherSource && weatherSource.liveData) {
+    const wd = weatherSource.liveData;
+    answerText = `### Real-Time Weather: ${wd.location}
+* **Current Condition:** ${wd.condition}
+* **Temperature:** ${wd.temperature} (Feels like ${wd.feelsLike})
+* **Relative Humidity:** ${wd.humidity}
+* **Wind Speed:** ${wd.windSpeed}
+
+*Verified live via Open-Meteo Public Weather API.*`;
+
+    keyPoints = [
+      `Current conditions in ${wd.location} indicate ${wd.condition.toLowerCase()} with a temperature of ${wd.temperature}.`,
+      `Relative humidity is measured at ${wd.humidity} with winds at ${wd.windSpeed}.`,
+      `Real-time meteorological telemetry provided directly by Open-Meteo.`
+    ];
+
+    followUpSuggestions = [
+      'Will it rain tomorrow?',
+      'Check temperature in another city',
+      'Explain meteorological conditions'
+    ];
+  } else if (financeSource && financeSource.liveData) {
+    const fd = financeSource.liveData;
+    if (fd.asset) {
+      answerText = `### Live Market Data: ${fd.asset}
+* **USD Price:** ${fd.usd}
+* **INR Price:** ${fd.inr}
+* **24h Change:** ${fd.change24h}
+
+*Verified in real-time via CoinGecko Public API.*`;
+
+      keyPoints = [
+        `${fd.asset} is currently trading at ${fd.usd} (${fd.inr}).`,
+        `24-hour market movement is currently at ${fd.change24h}.`,
+        `Data retrieved from CoinGecko open cryptocurrency index.`
+      ];
+    } else {
+      answerText = `### Live Currency Exchange Rates (Base USD)
+* **1 USD = ₹${fd.INR} INR**
+* **1 USD = €${fd.EUR} EUR**
+* **1 USD = £${fd.GBP} GBP**
+* **1 USD = ¥${fd.JPY} JPY**
+
+*Verified live via Open Exchange Rates API.*`;
+
+      keyPoints = [
+        `US Dollar (USD) exchanges at ₹${fd.INR} Indian Rupees.`,
+        `Euro exchange rate stands at €${fd.EUR} per USD.`,
+        `Rates reflect global foreign exchange interbank benchmarks.`
+      ];
+    }
+
+    followUpSuggestions = [
+      'Convert 100 USD to INR',
+      'Check Bitcoin price',
+      'Explain currency exchange mechanism'
+    ];
+  } else if (techNewsSource && techNewsSource.liveData) {
+    answerText = `### 🌐 Trending Tech & Engineering Headlines (HackerNews)
+${techNewsSource.extract}
+
+*Fetched live from HackerNews Firebase Public API.*`;
+
+    keyPoints = [
+      'Top developer discussions currently circulating on HackerNews.',
+      'Reflects real-time community engagement and upvotes.',
+      'Live streaming data from YCombinator Firebase public endpoint.'
+    ];
+
+    followUpSuggestions = [
+      'Explain the top discussion',
+      'Give another tech headline'
+    ];
+  } else if (publicApiSource && publicApiSource.liveData) {
+    answerText = `### 🌊 Public APIs Directory Recommendations
+${publicApiSource.extract}
+
+*Discovered via github.com/public-apis/public-apis directory catalogue.*`;
+
+    keyPoints = [
+      'Curated from the public-apis open source repository.',
+      'All listed endpoints support verified HTTPS and CORS standards.',
+      'Ready for immediate integration into developer apps.'
+    ];
+
+    followUpSuggestions = [
+      'Show more public APIs',
+      'Give sample fetch code in JavaScript',
+      'Which APIs require authentication?'
+    ];
+  }
+
+  // ==========================================
   // CASE 1: SPECIFIC ACADEMIC TOPICS / CURATED DOMAIN ACCURACY
   // ==========================================
-
-  // Frequency
-  if (q.includes('frequency')) {
+  else if (q.includes('frequency')) {
     answerText = `**Frequency** is the number of times a periodic event or wave cycle repeats in one second.
 
 ### Formula

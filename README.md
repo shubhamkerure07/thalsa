@@ -34,10 +34,17 @@ The product aesthetic is inspired by high-end design languages such as Linear, R
 6. **Built-in Local Database (SQLite)**:
    - Full history persistence with one-click reloading of past comparisons.
 
-### 🔮 v2.0.0 (Upcoming)
-- **Public APIs Gateway & Real-Time Ground Truth**:
-  - Live data grounding using curated public APIs (Weather via Open-Meteo, Financials via CoinGecko/Exchange Rates, Real-time Science & Reference).
-  - Dynamic Tool Calling & API Explorer.
+### 🌊 v2.0.0 (Ocean Layer & Public APIs Grounding)
+1. **Public APIs Directory Hub**:
+   - Curated directory of top, verified public APIs ingested from `public-apis/public-apis` across 10 categories (Weather, Finance, Games, Anime, Books, Development, News, Science, etc.).
+   - Frontend Public APIs explorer with search, category filtering, HTTPS/CORS indicators, and direct docs links.
+2. **Real-Time Live Ground Truth Dispatcher**:
+   - **Meteorology & Forecast:** Real-time weather, temperature, humidity, and wind conditions via Open-Meteo Public API with preset global city coordinates.
+   - **Financial & Crypto Markets:** Live spot cryptocurrency prices (Bitcoin, Ethereum, Solana, Doge) and global foreign exchange rates (USD, INR, EUR, GBP, JPY) via Coinbase & CoinGecko Public APIs.
+   - **Tech & Engineering News:** Real-time trending headlines from HackerNews Firebase Public API.
+   - **API Recommender Engine:** Intelligent discovery for developer questions (e.g., *"What public APIs exist for weather?"*).
+3. **Transparent Public API Verification**:
+   - All live facts cited with verified source URLs and integrated into Thalsa's answer synthesis.
 
 ---
 

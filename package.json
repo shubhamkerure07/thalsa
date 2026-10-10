@@ -1,6 +1,6 @@
 {
   "name": "thalsa",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Thalsa — Ocean of Knowledge Multi-Model AI Engine",
   "main": "server/index.js",
   "scripts": {

@@ -27,10 +27,16 @@ const elements = {
   views: {
     home: document.getElementById('view-home'),
     answer: document.getElementById('view-answer'),
+    apis: document.getElementById('view-apis'),
     study: document.getElementById('view-study'),
     history: document.getElementById('view-history'),
     settings: document.getElementById('view-settings')
   },
+  // Public APIs Hub (v2)
+  apiSearchInput: document.getElementById('api-search-input'),
+  apiCategorySelect: document.getElementById('api-category-select'),
+  apisCountDisplay: document.getElementById('apis-count-display'),
+  apisGrid: document.getElementById('apis-grid'),
   navLinks: document.querySelectorAll('.nav-links .nav-item, .mobile-bottom-nav .mobile-nav-btn'),
   navBrand: document.getElementById('nav-brand'),
   questionInput: document.getElementById('main-question-input'),
@@ -111,6 +117,8 @@ function switchView(viewName) {
 
   if (viewName === 'history') {
     fetchHistory();
+  } else if (viewName === 'apis') {
+    loadPublicApis();
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -309,6 +317,131 @@ function initEventListeners() {
         }
       }
     });
+  }
+
+  // Public APIs Hub search & filter listeners (v2)
+  if (elements.apiSearchInput) {
+    let debounceTimer;
+    elements.apiSearchInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        loadPublicApis();
+      }, 250);
+    });
+  }
+
+  if (elements.apiCategorySelect) {
+    elements.apiCategorySelect.addEventListener('change', () => {
+      loadPublicApis();
+    });
+  }
+}
+
+let cachedCategories = null;
+
+async function loadPublicApis() {
+  if (!elements.apisGrid) return;
+
+  const query = elements.apiSearchInput?.value.trim() || '';
+  const category = elements.apiCategorySelect?.value.trim() || '';
+
+  try {
+    // 1. Load categories if not yet cached
+    if (!cachedCategories && elements.apiCategorySelect) {
+      const catRes = await fetch('/api/public-apis/categories');
+      if (catRes.ok) {
+        const catData = await catRes.json();
+        cachedCategories = catData.categories || [];
+        cachedCategories.forEach(cat => {
+          const opt = document.createElement('option');
+          opt.value = cat;
+          opt.textContent = cat;
+          elements.apiCategorySelect.appendChild(opt);
+        });
+      }
+    }
+
+    // 2. Fetch filtered public APIs
+    const params = new URLSearchParams();
+    if (query) params.set('q', query);
+    if (category) params.set('category', category);
+
+    const res = await fetch(`/api/public-apis?${params.toString()}`);
+    if (!res.ok) throw new Error('Failed to fetch APIs');
+    const data = await res.json();
+    const apis = data.apis || [];
+
+    if (elements.apisCountDisplay) {
+      elements.apisCountDisplay.textContent = apis.length;
+    }
+
+    elements.apisGrid.innerHTML = '';
+    if (apis.length === 0) {
+      elements.apisGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 48px 16px; color: var(--text-muted);">
+          <p style="font-size: 15px; margin-bottom: 6px;">No public APIs matched your query.</p>
+          <p style="font-size: 13px;">Try clearing filters or searching for terms like "weather", "crypto", "games", or "science".</p>
+        </div>
+      `;
+      return;
+    }
+
+    apis.forEach(api => {
+      const card = document.createElement('div');
+      card.className = 'api-card';
+
+      const isNoAuth = api.auth.toLowerCase() === 'no';
+      const authClass = isNoAuth ? 'auth-free' : 'auth-key';
+      const authLabel = isNoAuth ? 'Auth: Free (None)' : `Auth: ${api.auth}`;
+
+      card.innerHTML = `
+        <div class="api-card-header">
+          <h4 class="api-card-title">${escapeHtml(api.name)}</h4>
+          <span class="api-card-category">${escapeHtml(api.category)}</span>
+        </div>
+        <p class="api-card-desc">${escapeHtml(api.description)}</p>
+        <div class="api-card-badges">
+          <span class="api-pill ${authClass}">${escapeHtml(authLabel)}</span>
+          <span class="api-pill">${api.https ? 'HTTPS' : 'HTTP'}</span>
+          <span class="api-pill">CORS: ${escapeHtml(api.cors)}</span>
+        </div>
+        <div class="api-card-actions">
+          <a href="${escapeHtml(api.link)}" target="_blank" rel="noopener noreferrer" class="api-action-btn btn-docs">
+            Docs & Endpoints
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+          <button class="api-action-btn btn-ask" data-name="${escapeHtml(api.name)}">
+            Ask Thalsa
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      `;
+
+      const askBtn = card.querySelector('.btn-ask');
+      askBtn.addEventListener('click', () => {
+        const prompt = `Show me how to fetch and use the ${api.name} API in JavaScript with a complete working example.`;
+        if (elements.questionInput) {
+          elements.questionInput.value = prompt;
+          elements.questionInput.dispatchEvent(new Event('input'));
+        }
+        window.location.hash = 'home';
+        askThalsa(prompt);
+      });
+
+      elements.apisGrid.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Error loading public APIs:', err);
+    if (elements.apisGrid) {
+      elements.apisGrid.innerHTML = `<div style="grid-column: 1 / -1; padding: 20px; color: var(--accent-red);">Failed to load public APIs: ${escapeHtml(err.message)}</div>`;
+    }
   }
 }
 

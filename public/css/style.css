@@ -1114,3 +1114,204 @@ button {
     gap: 2px;
   }
 }
+
+/* ==========================================================================
+   PUBLIC APIS HUB (v2 Ocean Layer)
+   ========================================================================== */
+.apis-view-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.apis-controls-bar {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0 16px 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.apis-search-box {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  transition: border-color var(--transition-fast);
+}
+
+.apis-search-box:focus-within {
+  border-color: var(--accent-blue);
+}
+
+.apis-search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.apis-category-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.apis-category-select:focus {
+  border-color: var(--accent-blue);
+}
+
+.apis-stats-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.apis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.api-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.api-card:hover {
+  border-color: var(--border-focus);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.api-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.api-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.api-card-category {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(122, 168, 200, 0.12);
+  color: var(--accent-blue);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.api-card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.api-card-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.api-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.api-pill.auth-free {
+  background: rgba(76, 175, 80, 0.12);
+  color: #81c784;
+  border-color: rgba(76, 175, 80, 0.25);
+}
+
+.api-pill.auth-key {
+  background: rgba(200, 164, 93, 0.12);
+  color: var(--accent-gold);
+  border-color: rgba(200, 164, 93, 0.25);
+}
+
+.api-card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.api-action-btn {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.api-action-btn.btn-docs {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-medium);
+}
+
+.api-action-btn.btn-docs:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.api-action-btn.btn-ask {
+  background: transparent;
+  color: var(--accent-blue);
+  border: 1px solid rgba(122, 168, 200, 0.3);
+}
+
+.api-action-btn.btn-ask:hover {
+  background: rgba(122, 168, 200, 0.12);
+  border-color: var(--accent-blue);
+}

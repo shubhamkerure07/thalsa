@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const providerManager = require('./providers/ProviderManager');
 const db = require('./db/database');
 const { processStudentQuestion } = require('./engine/LumiqOrchestrator');
+const { getAllApis, getCategories, searchApis } = require('./knowledge/PublicApisCatalog');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -48,6 +49,30 @@ app.get('/api/models', (req, res) => {
       configuredCount,
       totalCount: models.length
     });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/public-apis - List and search curated public APIs (v2 feature)
+app.get('/api/public-apis', (req, res) => {
+  try {
+    const { q = '', category = '' } = req.query;
+    const apis = searchApis(q, category);
+    res.json({
+      count: apis.length,
+      apis
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/public-apis/categories - List available public API categories
+app.get('/api/public-apis/categories', (req, res) => {
+  try {
+    const categories = getCategories();
+    res.json({ categories });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

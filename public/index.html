@@ -28,6 +28,7 @@
 
         <nav class="nav-links">
           <a href="#home" class="nav-item active" data-view="home">Home</a>
+          <a href="#apis" class="nav-item" data-view="apis">Public APIs</a>
           <a href="#history" class="nav-item" data-view="history">History</a>
           <a href="#study" class="nav-item" data-view="study">Study Mode</a>
           <a href="#settings" class="nav-item" data-view="settings">Settings</a>
@@ -242,6 +243,39 @@
         </div>
       </section>
 
+      <!-- 4. PUBLIC APIS HUB VIEW (v2 Ocean Layer) -->
+      <section id="view-apis" class="view-section">
+        <div class="apis-view-container">
+          <div class="page-title-row">
+            <div>
+              <h2 class="page-title">🌊 Public APIs Hub</h2>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Curated open, zero-auth and developer APIs from github.com/public-apis/public-apis powering Thalsa.</p>
+            </div>
+          </div>
+
+          <div class="apis-controls-bar">
+            <div class="apis-search-box">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="api-search-input" placeholder="Search APIs by name, category, or keyword..." autocomplete="off">
+            </div>
+            <select id="api-category-select" class="apis-category-select">
+              <option value="">All Categories</option>
+            </select>
+          </div>
+
+          <div class="apis-stats-row">
+            <span>Showing <strong id="apis-count-display">0</strong> verified APIs</span>
+          </div>
+
+          <div class="apis-grid" id="apis-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
       <!-- 5. SETTINGS VIEW -->
       <section id="view-settings" class="view-section">
         <div class="settings-view-container">
@@ -327,6 +361,14 @@
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
         </svg>
         <span>Study</span>
+      </button>
+      <button class="mobile-nav-btn" data-view="apis">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span>APIs</span>
       </button>
       <button class="mobile-nav-btn" data-view="history">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

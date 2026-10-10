@@ -20,7 +20,7 @@ function fetchJson(targetUrl, options = {}) {
         path: parsedUrl.pathname + parsedUrl.search,
         method: options.method || 'GET',
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) LUMIQ-StudyAssistant/1.0 (contact@lumiq.app)',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Thalsa-KnowledgeEngine/2.0 (contact@thalsa.dev)',
           'Accept': 'application/json, text/plain, */*',
           'Accept-Encoding': 'gzip, deflate',
           ...(options.headers || {})
