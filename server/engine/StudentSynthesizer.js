@@ -1,5 +1,5 @@
 /**
- * LUMIQ Pedagogical Answer Synthesizer
+ * THALSA Pedagogical Answer Synthesizer
  * Formulates clear, student-friendly explanations based on verified retrieved facts.
  * Adapts structure based on domain: Engineering, Coding, Math, Definitions, Exam, Study.
  */

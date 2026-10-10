@@ -3,7 +3,7 @@ const { formatStudentResponse } = require('./StudentSynthesizer');
 const providerManager = require('../providers/ProviderManager');
 
 /**
- * LUMIQ Unified Student Intelligence Orchestrator
+ * THALSA Unified Student & Public Knowledge Orchestrator
  *
  * Flow:
  * 1. Receive question & options (mode, examMarks, isStudyMode, previousContext)

@@ -5,11 +5,11 @@ const path = require('path');
 const crypto = require('crypto');
 const providerManager = require('./providers/ProviderManager');
 const db = require('./db/database');
-const { processStudentQuestion } = require('./engine/LumiqOrchestrator');
+const { processStudentQuestion } = require('./engine/ThalsaOrchestrator');
 const { getAllApis, getCategories, searchApis } = require('./knowledge/PublicApisCatalog');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 
 app.use(cors());
 app.use(express.json());
