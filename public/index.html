@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THALSA — Your AI Study Companion</title>
+  <meta name="description" content="THALSA is your simple AI study companion. Ask once and get clear, student-friendly explanations with verified sources.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Markdown & Math rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Minimal Navigation -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="#home" class="brand-link" id="nav-brand">
+          <div class="brand-logo-mark">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#0F1012" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="brand-title">THALSA</span>
+        </a>
+
+        <nav class="nav-links">
+          <a href="#home" class="nav-item active" data-view="home">Home</a>
+          <a href="#history" class="nav-item" data-view="history">History</a>
+          <a href="#study" class="nav-item" data-view="study">Study Mode</a>
+          <a href="#settings" class="nav-item" data-view="settings">Settings</a>
+        </nav>
+
+        <div class="header-meta">
+          <div class="api-badge ready" id="global-api-badge" title="THALSA Knowledge Base is active">
+            <span class="dot"></span>
+            <span class="text">STUDY READY</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+      
+      <!-- 1. HOME VIEW (Extremely Simple Student Entry) -->
+      <section id="view-home" class="view-section active">
+        <div class="hero-container">
+          <h1 class="hero-brand-name">THALSA</h1>
+          <p class="hero-tagline">Your AI study companion.</p>
+          <p class="hero-subtext">Learn anything. Understand it better.</p>
+        </div>
+
+        <div class="ask-box-wrapper">
+          <div class="ask-box">
+            <div class="ask-input-row">
+              <textarea 
+                id="main-question-input" 
+                class="ask-textarea" 
+                placeholder="What do you want to learn? (e.g. Explain pointers in C, Explain Kirchhoff's laws, What is frequency?)"
+                rows="2"
+              ></textarea>
+            </div>
+
+            <div class="ask-bottom-bar">
+              <div class="exam-marks-selector" id="exam-marks-bar">
+                <span class="marks-label">Exam Mode:</span>
+                <button type="button" class="mark-btn" data-marks="2">2 marks</button>
+                <button type="button" class="mark-btn" data-marks="5">5 marks</button>
+                <button type="button" class="mark-btn" data-marks="8">8 marks</button>
+                <button type="button" class="mark-btn" data-marks="10">10 marks</button>
+              </div>
+
+              <button id="main-submit-btn" class="ask-submit-btn" disabled>
+                <span>ASK THALSA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Quick Examples -->
+        <div class="sample-prompts-container">
+          <div class="sample-prompts-label">Quick topics students ask:</div>
+          <div class="sample-prompts-list">
+            <button class="sample-prompt-pill" data-prompt="Explain frequency in simple terms.">What is frequency?</button>
+            <button class="sample-prompt-pill" data-prompt="Explain pointers in C with code.">Explain pointers in C</button>
+            <button class="sample-prompt-pill" data-prompt="Explain Kirchhoff's voltage law for 5 marks.">Kirchhoff's voltage law</button>
+            <button class="sample-prompt-pill" data-prompt="Give me an 8-mark answer on quantum computing.">Quantum computing (8 marks)</button>
+            <button class="sample-prompt-pill" data-prompt="Write a simple Python program for factorial.">Python factorial code</button>
+          </div>
+        </div>
+
+        <!-- Subtle Thinking Indicator -->
+        <div id="progress-container" class="progress-card" style="display: none;">
+          <div class="progress-header">
+            <div class="progress-spinner"></div>
+            <span id="progress-header-title">THALSA is preparing your answer...</span>
+          </div>
+          <div class="progress-sub-step" id="progress-sub-step-text">
+            Consulting verified knowledge sources & synthesizing clear explanation...
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ANSWER VIEW (Student-Centric Focused Answer) -->
+      <section id="view-answer" class="view-section">
+        <div class="answer-container">
+          
+          <!-- Back / New Question Row -->
+          <div class="answer-top-bar">
+            <button class="back-link-btn" id="btn-back-home">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Ask another question</span>
+            </button>
+            <div class="answer-meta-pill" id="answer-mode-badge">Student Guide</div>
+          </div>
+
+          <!-- Question Display Card -->
+          <div class="student-question-card">
+            <div class="section-micro-label">QUESTION</div>
+            <h2 class="student-question-text" id="answer-question-display">Question title</h2>
+          </div>
+
+          <!-- THALSA Main Answer Card -->
+          <div class="thalsa-main-answer-card">
+            <div class="answer-card-header">
+              <div class="answer-brand-title">
+                <span class="answer-dot"></span>
+                <span>THALSA ANSWER</span>
+              </div>
+              <button class="copy-action-btn" id="btn-copy-answer" title="Copy answer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            
+            <div class="answer-card-body markdown-content" id="answer-body-content">
+              <!-- Rendered student answer -->
+            </div>
+          </div>
+
+          <!-- KEY POINTS SECTION -->
+          <div class="key-points-card" id="key-points-card">
+            <div class="key-points-header">
+              <span class="key-points-icon">✦</span>
+              <span>KEY POINTS</span>
+            </div>
+            <ul class="key-points-list" id="key-points-list">
+              <!-- Rendered key takeaways -->
+            </ul>
+          </div>
+
+          <!-- SOURCES USED SECTION (Clean Expandable Drawer) -->
+          <div class="sources-card">
+            <button class="sources-toggle-btn" id="btn-toggle-sources">
+              <span class="sources-toggle-left">
+                <span class="sources-title">SOURCES USED</span>
+                <span class="sources-summary" id="sources-summary-text">Wikipedia · Public Knowledge</span>
+              </span>
+              <span class="sources-chevron" id="sources-chevron">▾</span>
+            </button>
+            <div class="sources-drawer" id="sources-drawer" style="display: none;">
+              <ul class="sources-list" id="sources-list-container">
+                <!-- Dynamically populated real sources -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- SMART FOLLOW-UP ACTIONS -->
+          <div class="actions-card">
+            <div class="actions-title">ACTIONS</div>
+            <div class="actions-grid" id="follow-up-actions-container">
+              <button class="smart-action-pill" data-action="simpler">Explain simpler</button>
+              <button class="smart-action-pill" data-action="example">Give example</button>
+              <button class="smart-action-pill" data-action="5-mark">5-mark exam answer</button>
+              <button class="smart-action-pill" data-action="8-mark">8-mark exam answer</button>
+              <button class="smart-action-pill" data-action="step-by-step">Explain step-by-step</button>
+              <button class="smart-action-pill" data-action="quiz">Quiz me</button>
+            </div>
+
+            <!-- Follow-up input row -->
+            <div class="follow-up-input-row">
+              <input type="text" id="follow-up-text-input" class="follow-up-input" placeholder="Ask a follow-up question...">
+              <button id="btn-send-follow-up" class="follow-up-send-btn">Ask</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. STUDY MODE VIEW -->
+      <section id="view-study" class="view-section">
+        <div class="study-view-container">
+          <div class="page-title-row">
+            <div>
+              <h2 class="page-title">Study Mode 🎓</h2>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Learn step-by-step with your personal AI study tutor.</p>
+            </div>
+          </div>
+
+          <div class="study-card">
+            <p style="color: var(--text-secondary); margin-bottom: 16px;">
+              Tell THALSA what concept you want to study. THALSA will explain it simply, give you an intuitive example, and test your understanding with a friendly check.
+            </p>
+            <div class="form-group">
+              <input type="text" id="study-topic-input" class="form-input" placeholder="e.g. Teach me Laplace transforms, Teach me Pointers, Teach me Photosynthesis">
+            </div>
+            <div class="form-actions" style="justify-content: flex-start; margin-top: 14px;">
+              <button class="btn-primary" id="btn-start-study">Start Tutoring Session</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. HISTORY VIEW -->
+      <section id="view-history" class="view-section">
+        <div class="history-view-container">
+          <div class="page-title-row">
+            <div>
+              <h2 class="page-title">Study History</h2>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Reopen previously learned topics and exam notes.</p>
+            </div>
+            <button class="action-btn-secondary" id="btn-clear-history-all">
+              <span>Clear History</span>
+            </button>
+          </div>
+          <div class="history-list" id="history-items-container">
+            <!-- Dynamically populated history cards -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SETTINGS VIEW -->
+      <section id="view-settings" class="view-section">
+        <div class="settings-view-container">
+          <div class="page-title-row">
+            <div>
+              <h2 class="page-title">Settings</h2>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Optional AI model keys, knowledge sources, and data management.</p>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3>Zero-Cost Public Knowledge Engine</h3>
+            <p style="margin-bottom: 12px;">
+              By default, THALSA runs at <strong>zero cost</strong> by retrieving and structuring facts from free, authoritative public knowledge platforms:
+            </p>
+            <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 13.5px; margin-bottom: 18px; line-height: 1.7;">
+              <li><strong>Wikipedia & Wikidata:</strong> General concepts, scientific laws, formulas, and definitions</li>
+              <li><strong>Stack Exchange (Stack Overflow):</strong> Programming, compiler fixes, and technical diagnostics</li>
+              <li><strong>OpenAlex:</strong> Scholarly publications, research insights, and academic literature</li>
+            </ul>
+          </div>
+
+          <div class="settings-card">
+            <h3>Optional AI Enhancement (Bring Your Own Key)</h3>
+            <p>
+              If you have an API key for Google Gemini, Groq, Cerebras, OpenAI, or Claude, add it below. THALSA will use it on the server to articulate answers. If left empty, THALSA operates using its transparent verified public knowledge engine.
+            </p>
+            
+            <div class="form-group">
+              <label class="form-label" for="setting-gemini-key">Google Gemini API Key</label>
+              <input type="password" id="setting-gemini-key" class="form-input" placeholder="AIza..." autocomplete="off">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setting-groq-key">Groq API Key</label>
+              <input type="password" id="setting-groq-key" class="form-input" placeholder="gsk_..." autocomplete="off">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setting-cerebras-key">Cerebras API Key</label>
+              <input type="password" id="setting-cerebras-key" class="form-input" placeholder="csk-..." autocomplete="off">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setting-openai-key">OpenAI API Key</label>
+              <input type="password" id="setting-openai-key" class="form-input" placeholder="sk-..." autocomplete="off">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setting-anthropic-key">Anthropic API Key</label>
+              <input type="password" id="setting-anthropic-key" class="form-input" placeholder="sk-ant-..." autocomplete="off">
+            </div>
+
+            <div class="form-actions">
+              <button class="btn-primary" id="btn-save-api-keys">Save API Keys</button>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3>Clear Saved History</h3>
+            <p>Delete all locally saved study questions and answers from your SQLite database.</p>
+            <div class="form-actions" style="justify-content: flex-start;">
+              <button class="btn-danger" id="btn-danger-clear-db">Erase All Study History</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+      <button class="mobile-nav-btn active" data-view="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="mobile-nav-btn" data-view="study">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        <span>Study</span>
+      </button>
+      <button class="mobile-nav-btn" data-view="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>History</span>
+      </button>
+      <button class="mobile-nav-btn" data-view="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
+
