@@ -202,10 +202,36 @@ function initEventListeners() {
     elements.btnCopyAnswer.addEventListener('click', () => {
       if (state.currentAnswer) {
         navigator.clipboard.writeText(state.currentAnswer);
+        const originalContent = elements.btnCopyAnswer.innerHTML;
+        elements.btnCopyAnswer.classList.add('copied');
+        elements.btnCopyAnswer.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Copied!</span>
+        `;
         showToast('Answer copied to clipboard.');
+        setTimeout(() => {
+          elements.btnCopyAnswer.classList.remove('copied');
+          elements.btnCopyAnswer.innerHTML = originalContent;
+        }, 2200);
       }
     });
   }
+
+  // Global '/' shortcut to focus search omnibox
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== elements.questionInput && 
+        document.activeElement.tagName !== 'INPUT' && 
+        document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      window.location.hash = 'home';
+      setTimeout(() => {
+        elements.questionInput.focus();
+        elements.questionInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+    }
+  });
 
   // Sources Accordion Toggle
   if (elements.btnToggleSources) {

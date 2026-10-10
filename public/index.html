@@ -3,41 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>THALSA — Your AI Study Companion</title>
-  <meta name="description" content="THALSA is your simple AI study companion. Ask once and get clear, student-friendly explanations with verified sources.">
+  <title>THALSA — Student Knowledge Platform & Answer Engine</title>
+  <meta name="description" content="THALSA is a student-friendly knowledge and answer platform. Explore questions, understand difficult topics, find verified sources, and learn more efficiently.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <!-- Markdown & Math rendering -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <div class="app-container">
-    <!-- Top Minimal Navigation -->
+    
+    <!-- Top Editorial Header -->
     <header class="site-header">
       <div class="header-inner">
         <a href="#home" class="brand-link" id="nav-brand">
           <div class="brand-logo-mark">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#0F1012" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="4" width="18" height="4" rx="1.5" fill="#151515"/>
+              <rect x="9.5" y="8" width="5" height="12" rx="1.5" fill="#151515"/>
+              <circle cx="17.5" cy="14.5" r="2.5" fill="#D5FF72" stroke="#151515" stroke-width="1.5"/>
             </svg>
           </div>
           <span class="brand-title">THALSA</span>
+          <span class="brand-badge">v2.0</span>
         </a>
 
         <nav class="nav-links">
           <a href="#home" class="nav-item active" data-view="home">Home</a>
-          <a href="#apis" class="nav-item" data-view="apis">Public APIs</a>
-          <a href="#history" class="nav-item" data-view="history">History</a>
+          <a href="#apis" class="nav-item" data-view="apis">Public APIs Hub</a>
           <a href="#study" class="nav-item" data-view="study">Study Mode</a>
+          <a href="#history" class="nav-item" data-view="history">History</a>
           <a href="#settings" class="nav-item" data-view="settings">Settings</a>
         </nav>
 
         <div class="header-meta">
-          <div class="api-badge ready" id="global-api-badge" title="THALSA Knowledge Base is active">
+          <div class="api-badge" id="global-api-badge" title="THALSA Engine is operational">
             <span class="dot"></span>
-            <span class="text">STUDY READY</span>
+            <span class="text">OCEAN READY</span>
           </div>
         </div>
       </div>
@@ -46,21 +50,51 @@
     <!-- Main Content Area -->
     <main class="main-wrapper">
       
-      <!-- 1. HOME VIEW (Extremely Simple Student Entry) -->
+      <!-- 1. HOME & LANDING VIEW -->
       <section id="view-home" class="view-section active">
+        
+        <!-- Hero Header -->
         <div class="hero-container">
-          <h1 class="hero-brand-name">THALSA</h1>
-          <p class="hero-tagline">Your AI study companion.</p>
-          <p class="hero-subtext">Learn anything. Understand it better.</p>
+          <div class="hero-eyebrow">
+            <span class="sparkle">✦</span>
+            <span>Zero-Cost Knowledge & Ground Truth Engine</span>
+          </div>
+          <h1 class="hero-headline">
+            From Information to <span class="highlight-lime">Understanding</span>.
+          </h1>
+          <p class="hero-tagline">
+            The student knowledge platform built for genuine conceptual clarity, exam-ready answers, and transparent sources.
+          </p>
         </div>
 
+        <!-- Interactive Hero Visual: The Information Crystallizer -->
+        <div class="crystallizer-wrap">
+          <div class="crystallizer-canvas">
+            <div class="crystallizer-orbit orbit-1">
+              <div class="crystallizer-node node-lime" style="top: 0; left: 38px;"></div>
+            </div>
+            <div class="crystallizer-orbit orbit-2">
+              <div class="crystallizer-node node-violet" style="bottom: 8px; right: 24px;"></div>
+              <div class="crystallizer-node node-ink" style="top: 18px; left: 14px;"></div>
+            </div>
+            <div class="crystallizer-orbit orbit-3">
+              <div class="crystallizer-node node-lime" style="bottom: 12px; left: 45px;"></div>
+            </div>
+            <div class="crystallizer-center-t">T</div>
+          </div>
+          <div class="crystallizer-caption">
+            THALSA Crystallizer · Ground Truth Ingestion & Multi-Source Synthesis
+          </div>
+        </div>
+
+        <!-- Central Omnibox Ask Container -->
         <div class="ask-box-wrapper">
           <div class="ask-box">
             <div class="ask-input-row">
               <textarea 
                 id="main-question-input" 
                 class="ask-textarea" 
-                placeholder="What do you want to learn? (e.g. Explain pointers in C, Explain Kirchhoff's laws, What is frequency?)"
+                placeholder="What do you want to learn? (e.g. Explain pointers in C, Kirchhoff's laws, Bitcoin spot price, Weather in Tokyo...)"
                 rows="2"
               ></textarea>
             </div>
@@ -83,33 +117,119 @@
               </button>
             </div>
           </div>
+          <div class="keyboard-hint">Press <strong>Enter ↵</strong> to ask &middot; <strong>Shift + Enter</strong> for a new line</div>
         </div>
 
-        <!-- Student Quick Examples -->
+        <!-- Suggested Student Prompts -->
         <div class="sample-prompts-container">
-          <div class="sample-prompts-label">Quick topics students ask:</div>
+          <div class="sample-prompts-label">Curated Inquiries & Live Telemetry:</div>
           <div class="sample-prompts-list">
-            <button class="sample-prompt-pill" data-prompt="Explain frequency in simple terms.">What is frequency?</button>
-            <button class="sample-prompt-pill" data-prompt="Explain pointers in C with code.">Explain pointers in C</button>
-            <button class="sample-prompt-pill" data-prompt="Explain Kirchhoff's voltage law for 5 marks.">Kirchhoff's voltage law</button>
-            <button class="sample-prompt-pill" data-prompt="Give me an 8-mark answer on quantum computing.">Quantum computing (8 marks)</button>
-            <button class="sample-prompt-pill" data-prompt="Write a simple Python program for factorial.">Python factorial code</button>
+            <button class="sample-prompt-pill" data-prompt="Explain pointers in C with memory diagram.">Explain pointers in C</button>
+            <button class="sample-prompt-pill" data-prompt="What is frequency in physics?">What is frequency?</button>
+            <button class="sample-prompt-pill" data-prompt="Explain Kirchhoff's voltage law for 5 marks.">Kirchhoff's voltage law (5 marks)</button>
+            <button class="sample-prompt-pill" data-prompt="Current price of Bitcoin and 24h change">Bitcoin spot price</button>
+            <button class="sample-prompt-pill" data-prompt="Current weather in Tokyo">Weather in Tokyo</button>
+            <button class="sample-prompt-pill" data-prompt="Derive kinetic energy formula step by step.">Kinetic energy derivation</button>
           </div>
         </div>
 
-        <!-- Subtle Thinking Indicator -->
+        <!-- Progress / Thinking State -->
         <div id="progress-container" class="progress-card" style="display: none;">
           <div class="progress-header">
             <div class="progress-spinner"></div>
-            <span id="progress-header-title">THALSA is preparing your answer...</span>
+            <span id="progress-header-title">Synthesizing Understanding...</span>
           </div>
           <div class="progress-sub-step" id="progress-sub-step-text">
-            Consulting verified knowledge sources & synthesizing clear explanation...
+            Consulting verified public knowledge platforms & orchestrating clear explanation...
           </div>
         </div>
+
+        <!-- HOW THALSA WORKS SECTION -->
+        <section class="landing-editorial-section">
+          <div class="editorial-section-tag">ARCHITECTURAL DESIGN</div>
+          <h2 class="editorial-section-title">How THALSA Delivers Genuine Clarity</h2>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <span class="step-number">01</span>
+              <h3>Inquire & Scope</h3>
+              <p>Enter any technical concept, coding bug, or exam question. Optionally select a target exam mark (2, 5, 8, or 10 marks) to calibrate explanation depth.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-number">02</span>
+              <h3>Orchestrate Ground Truth</h3>
+              <p>THALSA queries verified open platforms — Wikipedia, Wikidata, Stack Exchange, OpenAlex, Open-Meteo, and Coinbase — without hallucinatory filler.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-number">03</span>
+              <h3>Understand & Retain</h3>
+              <p>Receive structured answers with key takeaways, formulas, code snippets, verified source links, and contextual follow-up explorations.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- REAL CAPABILITIES SHOWROOM -->
+        <section class="landing-editorial-section">
+          <div class="editorial-section-tag">CORE CAPABILITIES</div>
+          <h2 class="editorial-section-title">Built for Students, Engineers & Curious Minds</h2>
+
+          <div class="capabilities-grid">
+            <div class="capability-card lime-accent">
+              <div class="capability-icon-wrap">📝</div>
+              <h3>Exam-Engineered Answers</h3>
+              <p>Format answers calibrated to academic syllabus marking schemes. Includes crisp definitions, structured derivations, and conclusion sections.</p>
+            </div>
+
+            <div class="capability-card violet-accent">
+              <div class="capability-icon-wrap">💻</div>
+              <h3>Code & Compiler Diagnostics</h3>
+              <p>Deep technical answers with syntax highlighting for C, Python, and JavaScript, backed by verified developer discussions and memory diagrams.</p>
+            </div>
+
+            <div class="capability-card lime-accent">
+              <div class="capability-icon-wrap">⚡</div>
+              <h3>Live Public Telemetry</h3>
+              <p>Instant real-time grounding for weather, global currency exchange rates, cryptocurrency prices, and developer discussions via zero-auth APIs.</p>
+            </div>
+
+            <div class="capability-card violet-accent">
+              <div class="capability-icon-wrap">🔍</div>
+              <h3>Transparent Attribution</h3>
+              <p>Every response links to its authoritative source references. Expand the source drawer to inspect original citations and research records.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TASTEFUL ANSWER PREVIEW -->
+        <section class="landing-editorial-section">
+          <div class="editorial-section-tag">VERIFIED SAMPLE</div>
+          <h2 class="editorial-section-title">Anatomy of a THALSA Answer</h2>
+
+          <div class="sample-preview-box">
+            <div class="sample-preview-header">
+              <span class="preview-badge">5-Mark Standard</span>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">Verified Reference</span>
+            </div>
+            <div class="sample-q">Q: What is Kirchhoff's Voltage Law (KVL)?</div>
+            <div class="sample-a-body">
+              <strong>Definition:</strong> Kirchhoff's Voltage Law states that the directed sum of electrical potential differences (voltages) around any closed loop or mesh in an electric circuit is equal to zero: <code>∑V = 0</code>.
+              <br><br>
+              <strong>Physical Principle:</strong> KVL is a direct consequence of the conservation of energy in an electrostatic field. Work done in carrying a unit test charge in a closed electrostatic loop is identically zero.
+            </div>
+            <div class="sample-points">
+              <strong>Key Points:</strong> Applies to any lumped closed circuit loop &middot; Direct expression of energy conservation &middot; Sign convention: gains are positive, drops are negative.
+            </div>
+            <div class="sample-sources-bar">
+              <span>Sources:</span>
+              <span class="sample-source-tag">Wikipedia</span>
+              <span class="sample-source-tag">Wikidata</span>
+            </div>
+          </div>
+        </section>
+
       </section>
 
-      <!-- 2. ANSWER VIEW (Student-Centric Focused Answer) -->
+      <!-- 2. ANSWER VIEW (STUDENT WORKSPACE) -->
       <section id="view-answer" class="view-section">
         <div class="answer-container">
           
@@ -156,7 +276,7 @@
           <div class="key-points-card" id="key-points-card">
             <div class="key-points-header">
               <span class="key-points-icon">✦</span>
-              <span>KEY POINTS</span>
+              <span>KEY TAKEAWAYS</span>
             </div>
             <ul class="key-points-list" id="key-points-list">
               <!-- Rendered key takeaways -->
@@ -167,8 +287,8 @@
           <div class="sources-card">
             <button class="sources-toggle-btn" id="btn-toggle-sources">
               <span class="sources-toggle-left">
-                <span class="sources-title">SOURCES USED</span>
-                <span class="sources-summary" id="sources-summary-text">Wikipedia · Public Knowledge</span>
+                <span class="sources-title">SOURCES & GROUND TRUTH</span>
+                <span class="sources-summary" id="sources-summary-text">Wikipedia &middot; Public Knowledge</span>
               </span>
               <span class="sources-chevron" id="sources-chevron">▾</span>
             </button>
@@ -181,7 +301,7 @@
 
           <!-- SMART FOLLOW-UP ACTIONS -->
           <div class="actions-card">
-            <div class="actions-title">ACTIONS</div>
+            <div class="actions-title">FOLLOW-UP EXPLORATIONS</div>
             <div class="actions-grid" id="follow-up-actions-container">
               <button class="smart-action-pill" data-action="simpler">Explain simpler</button>
               <button class="smart-action-pill" data-action="example">Give example</button>
@@ -213,7 +333,7 @@
 
           <div class="study-card">
             <p style="color: var(--text-secondary); margin-bottom: 16px;">
-              Tell THALSA what concept you want to study. THALSA will explain it simply, give you an intuitive example, and test your understanding with a friendly check.
+              Tell THALSA what concept you want to study. THALSA will explain it simply, give you an intuitive real-world analogy, and conclude with a quick check-for-understanding.
             </p>
             <div class="form-group">
               <input type="text" id="study-topic-input" class="form-input" placeholder="e.g. Teach me Laplace transforms, Teach me Pointers, Teach me Photosynthesis">
@@ -243,13 +363,13 @@
         </div>
       </section>
 
-      <!-- 4. PUBLIC APIS HUB VIEW (v2 Ocean Layer) -->
+      <!-- 5. PUBLIC APIS HUB VIEW (v2 Ocean Layer) -->
       <section id="view-apis" class="view-section">
         <div class="apis-view-container">
           <div class="page-title-row">
             <div>
-              <h2 class="page-title">🌊 Public APIs Hub</h2>
-              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Curated open, zero-auth and developer APIs from github.com/public-apis/public-apis powering Thalsa.</p>
+              <h2 class="page-title">Public APIs Hub</h2>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Curated open, zero-auth developer APIs powering THALSA.</p>
             </div>
           </div>
 
@@ -276,32 +396,33 @@
         </div>
       </section>
 
-      <!-- 5. SETTINGS VIEW -->
+      <!-- 6. SETTINGS VIEW -->
       <section id="view-settings" class="view-section">
         <div class="settings-view-container">
           <div class="page-title-row">
             <div>
               <h2 class="page-title">Settings</h2>
-              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Optional AI model keys, knowledge sources, and data management.</p>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Optional AI model keys, knowledge sources, and local database control.</p>
             </div>
           </div>
 
           <div class="settings-card">
             <h3>Zero-Cost Public Knowledge Engine</h3>
-            <p style="margin-bottom: 12px;">
-              By default, THALSA runs at <strong>zero cost</strong> by retrieving and structuring facts from free, authoritative public knowledge platforms:
+            <p>
+              By default, THALSA runs at <strong>zero cost</strong> by retrieving and structuring facts from free, authoritative public platforms:
             </p>
             <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 13.5px; margin-bottom: 18px; line-height: 1.7;">
               <li><strong>Wikipedia & Wikidata:</strong> General concepts, scientific laws, formulas, and definitions</li>
               <li><strong>Stack Exchange (Stack Overflow):</strong> Programming, compiler fixes, and technical diagnostics</li>
               <li><strong>OpenAlex:</strong> Scholarly publications, research insights, and academic literature</li>
+              <li><strong>Open-Meteo & Coinbase:</strong> Real-time meteorological and exchange telemetry</li>
             </ul>
           </div>
 
           <div class="settings-card">
             <h3>Optional AI Enhancement (Bring Your Own Key)</h3>
             <p>
-              If you have an API key for Google Gemini, Groq, Cerebras, OpenAI, or Claude, add it below. THALSA will use it on the server to articulate answers. If left empty, THALSA operates using its transparent verified public knowledge engine.
+              If you have an API key for Google Gemini, Groq, Cerebras, OpenAI, or Claude, configure it below. THALSA will use it to articulate answers. If left empty, THALSA operates using its verified public knowledge engine.
             </p>
             
             <div class="form-group">
@@ -345,6 +466,25 @@
       </section>
 
     </main>
+
+    <!-- Editorial Site Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-top-row">
+          <div class="footer-brand">THALSA &middot; Ocean of Knowledge</div>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#apis">Public APIs</a>
+            <a href="#study">Study Mode</a>
+            <a href="#history">History</a>
+            <a href="#settings">Settings</a>
+          </div>
+        </div>
+        <div class="footer-bottom-row">
+          Zero-cost ground truth knowledge synthesizer. Designed for students, researchers, and engineers. Open source &middot; No proprietary tracking &middot; Verified public data.
+        </div>
+      </div>
+    </footer>
 
     <!-- Mobile Bottom Navigation Bar -->
     <nav class="mobile-bottom-nav">
@@ -393,4 +533,3 @@
   <script src="js/app.js"></script>
 </body>
 </html>
-
